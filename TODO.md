@@ -1,3 +1,0 @@
-- Optimize code for Registration Verification, Bidding, SupplyLogistics
-- Update code for Insurance, End User as needed
-- Add Payments Contract

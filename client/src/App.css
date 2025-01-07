@@ -1,0 +1,195 @@
+/* Updated App.css */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #1f2937;
+  padding: 1em 2em;
+}
+
+nav a {
+  color: #ffffff;
+  margin-right: 1.5em;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #a0aec0;
+}
+
+/* Page Header (Top Section) */
+.page-header {
+  background-color: #4a5568;
+  color: #ffffff;
+  padding: 2em 2em;
+  text-align: center;
+  border-bottom: 4px solid #3182ce;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.page-header h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 0;
+  color: #edf2f7;
+}
+
+.page-header p {
+  margin: 0.5em 0 0;
+  font-size: 1em;
+  color: #cbd5e0;
+  font-weight: 400;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #63b3ed;
+  border-radius: 2px;
+}
+
+/* Container */
+.container {
+  padding: 2em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Form Styles */
+form {
+  background-color: #ffffff;
+  padding: 2em;
+  margin-bottom: 2em;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form h3 {
+  margin-top: 0;
+}
+
+input,
+select,
+button {
+  display: block;
+  margin-bottom: 1em;
+  padding: 0.75em;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+button {
+  background-color: #3182ce;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+button:hover {
+  background-color: #2b6cb0;
+}
+
+button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2em;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background-color: #f7fafc;
+}
+
+th,
+td {
+  padding: 1em;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Status Labels */
+.status {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.status.true {
+  background-color: #38a169;
+}
+
+.status.false {
+  background-color: #e53e3e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    text-align: center;
+  }
+
+  nav a {
+    display: block;
+    margin: 0.5em 0;
+  }
+
+  input,
+  select,
+  button {
+    max-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 0.75em;
+  }
+}

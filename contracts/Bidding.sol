@@ -33,6 +33,10 @@ contract Bidding {
     mapping(uint => Bid) public logisticsBids;
     mapping(uint => Bidder[]) public logisticsBidders;
 
+    // Mappings to track active bids
+    mapping(uint => uint) public activeChemicalBids; // chemicalId => bidId
+    mapping(uint => uint) public activeLogisticsBids; // chemicalId => bidId
+
     RegistrationVerification public immutable registrationVerification;
 
     event NewBid(
@@ -149,7 +153,20 @@ contract Bidding {
         )
         onlyRegisteredApprovedChemical(_chemicalId)
     {
+        // Check if there's an active bid for this chemical
+        uint activeBidId = activeChemicalBids[_chemicalId];
+        if (activeBidId != 0) {
+            Bid storage activeBid = chemicalBids[activeBidId];
+            require(
+                activeBid.status == BidStatus.Closed,
+                "An open bid for this chemical already exists"
+            );
+        }
+
         initiateBid(nextChemicalBidId, _chemicalId, _minPrice, true);
+
+        // Update the active bid mapping
+        activeChemicalBids[_chemicalId] = nextChemicalBidId - 1;
     }
 
     // Initiate a logistics bid
@@ -163,6 +180,21 @@ contract Bidding {
                 msg.sender == chemicalBid.topBidder,
             "You are not invloved in this deal"
         );
+
+        // Check if there's an active logistics bid for this chemical
+        uint activeBidId = activeLogisticsBids[chemicalBid.chemicalId];
+        if (activeBidId != 0) {
+            Bid storage activeBid = logisticsBids[activeBidId];
+            require(
+                activeBid.status == BidStatus.Closed,
+                "An open logistics bid for this chemical already exists"
+            );
+
+            // Update the active logistics bid mapping
+            activeLogisticsBids[chemicalBid.chemicalId] =
+                nextLogisticsBidId -
+                1;
+        }
 
         initiateBid(
             nextLogisticsBidId,
@@ -230,6 +262,13 @@ contract Bidding {
         bid.topBidder = bestBidder;
         bid.topOffer = bestOffer;
         bid.status = BidStatus.Closed;
+
+        // Reset the active bid mapping
+        if (isChemical) {
+            activeChemicalBids[bid.chemicalId] = 0;
+        } else {
+            activeLogisticsBids[bid.chemicalId] = 0;
+        }
 
         emit BidClosed(
             _bidId,
@@ -308,5 +347,9 @@ contract Bidding {
         }
 
         return bidderArray;
+    }
+
+    function getBidCount(bool isChemical) external view returns (uint) {
+        return isChemical ? nextChemicalBidId : nextLogisticsBidId;
     }
 }

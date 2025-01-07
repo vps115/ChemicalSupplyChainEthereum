@@ -251,4 +251,8 @@ contract SupplyLogistics {
             block.timestamp
         );
     }
+
+    function getShipmentCount() external view returns (uint) {
+        return shipmentCount;
+    }
 }

@@ -202,4 +202,8 @@ contract Insurance {
     ) external view returns (InsurancePolicy memory) {
         return policies[_policyId];
     }
+
+    function getPolicyCount() external view returns (uint) {
+        return nextPolicyId - 1;
+    }
 }

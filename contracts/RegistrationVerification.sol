@@ -178,4 +178,8 @@ contract RegistrationVerification {
     ) external view returns (uint[] memory) {
         return chemicalsRegisteredBy[_manufacturer];
     }
+
+    function getChemicalCount() external view returns (uint) {
+        return nextChemicalId - 1;
+    }
 }
